@@ -32,12 +32,12 @@ def make_expander(
 ):
     exp = parent.expander(label, expanded)
     m, c = exp.columns(2)
-    make_btn(
-        m, label='🏎️ 모멘텀 분석',
-        value=f'momentum_{group}')
-    make_btn(
-        c, label='🌻 상관성 분석',
-        value=f'correlation_{group}')
+    # make_btn(
+    #     m, label='🏎️ 모멘텀 분석',
+    #     value=f'momentum_{group}')
+    # make_btn(
+    #     c, label='🌻 상관성 분석',
+    #     value=f'correlation_{group}')
     make_checkboxs(exp, group)
 
 def make_checkboxs(
