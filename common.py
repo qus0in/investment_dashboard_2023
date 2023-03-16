@@ -19,7 +19,6 @@ def get_etf_name(code: str):
 @st.cache_data
 def get_history(code: str):
     two_year_ago = (get_today() - relativedelta(years=2)).strftime('%Y-%m-%d')
-    # print(now)
     return fdr.DataReader(code, start=two_year_ago)
 
 emoji_map = {

@@ -10,6 +10,10 @@ def content():
     page = st.session_state.get('page', 'dashboard')
     if page == 'dashboard':
         dashboard()
+        return
+    st.title(f"{st.session_state['way']} 분석")
+    st.header(st.session_state['group'])
+    st.subheader(get_today())
     if page.startswith('momentum'):
         momentum(page.split('_')[-1])
     if page.startswith('correlation'):
@@ -17,8 +21,6 @@ def content():
 
 def correlation(group: str):
     con = st.container()
-    con.header("상관성 분석")
-    con.subheader(get_today())
     days = int(st.session_state['days'])
     ts = [k.split('_')[-1] for k in st.session_state.keys() if k.startswith(group)]
     hs = pd.concat([get_history(t).Close for t in ts], axis=1)
@@ -74,7 +76,7 @@ def correlation(group: str):
 def momentum(group: str):
     con = st.container()
     days = int(st.session_state['days'])
-    ts = [k.split('_')[-1] for k in st.session_state.keys() if k.startswith(group)]
+    ts = [k.split('_')[-1] for k, v in st.session_state.items() if k.startswith(group) and v]
     hs = pd.concat([get_history(t).Close for t in ts], axis=1)
     hs.columns = ts
 
@@ -105,10 +107,8 @@ def momentum(group: str):
     today = today.drop(['group', 'code'],axis=1).set_index('종목코드')
     today.rename(columns = {'category': '분류'}, inplace=True)
     today['분류'] = today['분류'].apply(lambda x: emoji_map[x])
-    today = today.iloc[:,[2,1,3,0]]
+    today = today.iloc[:,[2,1,4,0]]
 
-    con.header("모멘텀 분석")
-    con.subheader(get_today())
     con.table(today)
     scores.columns = [get_etf_name(c) for c in hs.columns]
     fig = go.Figure()
@@ -131,7 +131,7 @@ def momentum(group: str):
 
 def dashboard():
     con = st.container()
-    con.header('ISA & 연금저축 듀얼 모멘텀 트레이딩')
+    con.title(f'시장 현황 ({get_today()})')
     dashboard = [
         ("🐳 코스피200", "069500"),
         ("🐜 코스닥150", "229200"),
@@ -168,7 +168,7 @@ def make_candle_chart(parent: Component, title: str, data: DF):
     fig.update_layout(
         title=title,
         xaxis_rangeslider_visible=False,
-        height=120,
+        height=150,
         margin={
             'l':0, 'r':0, 't':60, 'b':0,
             'pad':2

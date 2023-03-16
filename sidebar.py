@@ -11,18 +11,47 @@ def sidebar():
             value=f'dashboard')
     with col2:
         st.button('🔄 데이터 최신화', on_click=st.cache_data.clear)
+    sidebar.image(
+        "./static/invest.png", 
+        use_column_width=True)
     sidebar.select_slider(
         "🗓️ 분석 기간",
         [10, 20, 50, 100, 200],
         value = 50,
         key = "days"
     )
+    col1, col2 = sidebar.columns(2)
+    with col1:
+        st.radio(
+            '분석 그룹',
+            ['ISA', '연금저축'],
+            key="group")
+    with col2:
+        st.radio(
+            '분석 방식',
+            ['모멘텀', '상관성'],
+            key="way")
+    sidebar.button(
+        '분석',
+        use_container_width=True,
+        on_click=handle_analysis)
     make_expander(sidebar,
         label='⚔️ ISA',
         group='isa')
     make_expander(sidebar,
         label='🛡️ 연금저축',
         group='psf')
+
+def handle_analysis():
+    g = st.session_state['group']
+    w = st.session_state['way']
+    d = {
+        "모멘텀": "momentum",
+        "상관성": "correlation",
+        "ISA": "isa",
+        "연금저축": "psf",
+    }
+    handle_page(f"{d[w]}_{d[g]}")
 
 def make_expander(
     parent: Component,
@@ -31,13 +60,6 @@ def make_expander(
     expanded: bool = False
 ):
     exp = parent.expander(label, expanded)
-    m, c = exp.columns(2)
-    # make_btn(
-    #     m, label='🏎️ 모멘텀 분석',
-    #     value=f'momentum_{group}')
-    # make_btn(
-    #     c, label='🌻 상관성 분석',
-    #     value=f'correlation_{group}')
     make_checkboxs(exp, group)
 
 def make_checkboxs(
@@ -53,12 +75,12 @@ def make_checkboxs(
             if i+j == len(cats): break
             cat = cats[i+j]
             col.write(f"{emoji_map[cat]} **{cat}**")
-            cds = data[data.category == cat].code
-            for cd in cds:
+            rows = data[data.category == cat]
+            for row in rows.values:
                 col.checkbox(
-                    label=f"{get_etf_name(cd)}",
-                    value=True,
-                    key=f"{group}_{cd}"
+                    label=f"{get_etf_name(row[2])}",
+                    value=row[3],
+                    key=f"{group}_{row[2]}"
                 )
 
 def make_btn(
@@ -71,7 +93,6 @@ def make_btn(
         key=value,
         on_click=lambda: handle_page(value)
     )
-
 
 def handle_page(page: str):
     st.session_state['page'] = page
