@@ -11,9 +11,7 @@ def content():
     if page == 'dashboard':
         dashboard()
         return
-    st.title(f"{st.session_state['way']} 분석")
-    st.header(st.session_state['group'])
-    st.subheader(get_today())
+    st.title(f"{st.session_state['way']} 분석 ({st.session_state['group']}, {get_today()})")
     if page.startswith('momentum'):
         momentum(page.split('_')[-1])
     if page.startswith('correlation'):
