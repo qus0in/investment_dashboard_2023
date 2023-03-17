@@ -139,10 +139,11 @@ def dashboard():
         ("💵 달러선물", '261240'),
         ("🧈 금선물", '132030'),
         ("🛢️ 원유선물", '261220'),
+        ("🏭 구리선물", '138910'),
     ]
-    cols = con.columns(2)
     for i, d in enumerate(dashboard):
-        handle_dashboard(cols[i % 2], *d)
+        # cols = st.columns(2)
+        handle_dashboard(con, *d)
 
 def handle_dashboard(
         parent: Component,
@@ -166,10 +167,13 @@ def make_candle_chart(parent: Component, title: str, data: DF):
     fig.update_layout(
         title=title,
         xaxis_rangeslider_visible=False,
-        height=150,
+        height=180,
         margin={
             'l':0, 'r':0, 't':60, 'b':0,
             'pad':2
         },
     )
-    parent.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+    parent.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={'displayModeBar': True})
