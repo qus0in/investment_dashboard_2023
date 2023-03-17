@@ -45,7 +45,7 @@ def sidebar():
         use_column_width=True)
     sidebar.write(
         """
-        [![GitHub(https://badgen.net/badge/icon/github?icon=github&label)]](https://github.com/qus0in/investment_dashboard_2023)
+        [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/qus0in/investment_dashboard_2023)
         """
     )
 
