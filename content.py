@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 import plotly.figure_factory as ff
 from common import get_history, get_etf_name, DF, Component, get_today, emoji_map
 
-
 def content():
     page = st.session_state.get('page', 'dashboard')
     if page == 'dashboard':
