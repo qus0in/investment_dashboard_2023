@@ -3,8 +3,8 @@ import streamlit as st
 import plotly.graph_objects as go
 import data.finance as finance
 
-def long_short():
-    tickers = pd.read_csv("./data/long_short.csv", dtype=str).ticker
+def momentum(path: str):
+    tickers = pd.read_csv(path, dtype=str).ticker
 
     days = int(st.session_state['days'])
     hs = pd.concat([finance.get_ohlcv(t).Close for t in tickers], axis=1)
@@ -39,7 +39,7 @@ def long_short():
     fig = go.Figure()
     for ppi in scores:
         fig.add_trace(go.Scatter(
-            x=scores.index, y=scores[ppi], 
+            x=scores.index, y=scores[ppi],
             mode='lines+markers',
             name=ppi))
     fig.update_layout(
@@ -49,7 +49,8 @@ def long_short():
             'l':0, 'r':0, 't':30, 'b':0,
             'pad':1
         },
-        yaxis_range=[-0.5,0.5]
+        # yaxis_range=[-0.5,0.5],
+        colorway=pd.read_csv("./data/colors.csv", dtype=str).hex,
     )
     
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})

@@ -13,6 +13,9 @@ def sidebar():
             '🔄 데이터 갱신',
             on_click=st.cache_data.clear,
             use_container_width=True)
+        st.image(
+            './src/money_tree.png'
+        )
         st.write(
             """
             [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/qus0in/investment_dashboard_2023)
