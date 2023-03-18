@@ -1,11 +1,9 @@
 from sidebar import sidebar
+from content import content
 
 def main():
     sidebar()
     content()
-
-def content():
-    pass
 
 if __name__ == "__main__":
     main()
