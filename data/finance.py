@@ -11,4 +11,4 @@ def get_ohlcv(code: str) -> pd.Series:
 
 @st.cache_data
 def get_etf_name(code: str) -> str:
-    return fdr.StockListing('ETF/KR').query(f"Symbol == '{code}'").iloc[0, 1].split(' ')[1]
+    return fdr.StockListing('ETF/KR').query(f"Symbol == '{code}'").iloc[0, 1].split(' ')[-1]
