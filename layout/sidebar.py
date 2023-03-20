@@ -19,6 +19,6 @@ def sidebar():
         st.write(
             """
             [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/qus0in/investment_dashboard_2023)
-            ![Version](https://img.shields.io/badge/version-0.2.1-brightgreen)
+            ![Version](https://img.shields.io/badge/version-0.2.2-brightgreen)
             """
         )
