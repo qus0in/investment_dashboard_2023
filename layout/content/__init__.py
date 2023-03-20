@@ -4,7 +4,7 @@ from .momentum import momentum
 
 def content():
     tab1, tab2, tab3, tab4, tab5 = st.tabs(
-        ["Dashboard", "Long & Short", "Long Only", "Korea Only", "Leverage Only"]
+        ["Dashboard", "Long & Short", "Long Only", "Korea Only", "Leverage"]
     )
     with tab1:
         dashboard()
@@ -15,4 +15,4 @@ def content():
     with tab4:
         momentum("./data/kor_only.csv")
     with tab5:
-        momentum("./data/lev_only.csv")
+        momentum("./data/leverage.csv")
