@@ -8,7 +8,7 @@ import pandas as pd
 @st.cache_data
 def get_ohlcv(code: str) -> pd.Series:
     if len(code) < 6:
-        return yf.Ticker(code, period='2y')
+        return yf.Ticker(code).history(period='2y')
     two_year_ago = (datetime.now() - relativedelta(years=2)).strftime('%Y-%m-%d')
     return fdr.DataReader(code, start=two_year_ago)
 
