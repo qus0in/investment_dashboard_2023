@@ -14,7 +14,7 @@ def sidebar():
             on_click=st.cache_data.clear,
             use_container_width=True)
         st.image(
-            './src/money_tree.png'
+            './0.2/src/money_tree.png'
         )
         st.write(
             """
