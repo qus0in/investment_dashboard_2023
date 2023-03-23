@@ -50,7 +50,7 @@ def momentum(path: str):
             'pad':1
         },
         # yaxis_range=[-0.5,0.5],
-        colorway=pd.read_csv("./data/colors.csv", dtype=str).hex,
+        # colorway=pd.read_csv("./data/colors.csv", dtype=str).hex,
     )
     
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
