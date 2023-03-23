@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import data.finance as finance
 
 def dashboard():
-    tickers = pd.read_csv("./data/dashboard.csv", dtype=str).ticker
+    tickers = pd.read_csv("./0.2/data/dashboard.csv", dtype=str).ticker
     for i in range(0, len(tickers), 2):
         col1, col2 = st.columns(2)
         with col1:
