@@ -5,8 +5,8 @@ def sidebar():
     with sidebar:
         st.select_slider(
             "🗓️ 분석 기간",
-            [10, 20, 50, 100, 200],
-            value = 50,
+            [20, 60, 120, 240],
+            value = 20,
             key = "days"
         )
         st.button(
@@ -19,6 +19,6 @@ def sidebar():
         st.write(
             """
             [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/qus0in/investment_dashboard_2023)
-            ![Version](https://img.shields.io/badge/version-0.2.5-brightgreen)
+            ![Version](https://img.shields.io/badge/version-0.2.6-brightgreen)
             """
         )

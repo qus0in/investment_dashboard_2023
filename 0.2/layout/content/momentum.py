@@ -13,10 +13,10 @@ def momentum(path: str):
     sc = []
     for i in hs.keys():
         v = hs.loc[:, i]
-        pv = lambda x: pd.Series(
-            [v[vi - pd.DateOffset(months=x):].iloc[0] for vi in v.index],
-            index=v.index)
-        ppv = lambda x: (v - pv(x)) / pv(x) / x
+        # pv = lambda x: pd.Series(
+        #     [v[vi - pd.DateOffset(months=x):].iloc[0] for vi in v.index],
+        #     index=v.index)
+        ppv = lambda x: v.rolling(20 * x).agg(lambda x: (x.last - x.first) / x.first) / x
         r = ppv(1) + ppv(3) + ppv(6) + ppv(12)
         sc.append(r.tail(days))
     scores = pd.concat(sc, axis=1)
