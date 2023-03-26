@@ -16,7 +16,7 @@ def momentum(path: str):
         # pv = lambda x: pd.Series(
         #     [v[vi - pd.DateOffset(months=x):].iloc[0] for vi in v.index],
         #     index=v.index)
-        ppv = lambda x: v.rolling(20 * x).apply(lambda x: (x.last() - x.first()) / x.first()) / x
+        ppv = lambda x: v.rolling(20 * x).apply(lambda x: (x.iloc[-1] - x.iloc[0]) / x.iloc[0]) / x
         r = ppv(1) + ppv(3) + ppv(6) + ppv(12)
         sc.append(r.tail(days))
     scores = pd.concat(sc, axis=1)
