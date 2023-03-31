@@ -8,7 +8,7 @@ def sidebar():
         st.select_slider(
             "🗓️ 분석 기간",
             [20, 60, 120, 240],
-            value = 20,
+            value = 60,
             key = "days"
         )
         # 데이터 갱신 버튼
