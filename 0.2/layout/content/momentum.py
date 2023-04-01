@@ -16,10 +16,10 @@ def momentum(path: str):
     hs.columns = tickers
     col1, col2 = st.columns(2)
     with col1:
-        momentum_graph("최근 가중", days, hs, lambda x, v: v.rolling(
+        momentum_graph("최근 가중 (1+3+6+12개월)", days, hs, lambda x, v: v.rolling(
                 20 * x).apply(lambda x: (x.iloc[-1] - x.iloc[0]) / x.iloc[0]) / x)
     with col2:
-        momentum_graph("동일 가중", days, hs, lambda x, v: v.rolling(
+        momentum_graph("동일 가중 (1+3+6+12개월)", days, hs, lambda x, v: v.rolling(
                 20 * x).apply(lambda x: (x.iloc[-1] - x.iloc[0]) / x.iloc[0]) / 4)
 
 def momentum_graph(label, days, df, ppv):
@@ -65,7 +65,7 @@ def momentum_graph(label, days, df, ppv):
             mode='lines+markers',
             name=ppi))
     fig.update_layout(
-        title=f"1+3+6+12개월 {label} 모멘텀 스코어 트렌드 ({days}일)",
+        title=f"{label} 모멘텀 스코어 트렌드 ({days}일)",
         height=320,
         margin={
             'l': 0, 'r': 0, 't': 30, 'b': 0,
